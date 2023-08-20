@@ -1,9 +1,10 @@
 export const colors = {
-  primary: "#00A9B4",
+  primary: "#FF9B33",
   dark: "#181818",
   darkSideBar: "#1B1B1B",
   light: "#fff",
   lightDarker: "#8A8A8F",
+  lightRGBA50: "rgba(255, 255, 255, 0.5)",
 };
 export const fontSizeBase = 16;
 export const layout = {

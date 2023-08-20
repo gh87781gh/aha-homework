@@ -1,25 +1,18 @@
-import { createGlobalStyle } from 'styled-components'
-import { colors, gradient } from '../variables'
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: "UbuntuRegular";
+    src: local("UbuntuRegular"), url('/font/Ubuntu-Regular.ttf') format("truetype");
+  } 
   body {
-    font-family: -apple-system,'Noto Sans',BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
-    background-color: ${colors.primaryLight};
+    font-family: 'UbuntuRegular', sans-serif;
   }
 
   *{
     box-sizing: border-box;
   }
-
-  .ant-menu-submenu-popup .ant-menu-vertical.ant-menu-sub{
-    background: ${gradient.slider};
-  }
-
-  .anticon{
-    width:16px;
-    height:16px;
-  }
-`
+`;
 
 export const GlobalResetStyle = createGlobalStyle`
   html,
@@ -274,4 +267,4 @@ export const GlobalResetStyle = createGlobalStyle`
     padding: 0.2em;
     background-color: #feffe6;
   }
-`
+`;

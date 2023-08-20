@@ -16,9 +16,15 @@ export default function LayoutTemplate({
         token: {
           fontSize: fontSizeBase,
           colorPrimary: colors.primary,
-          colorPrimaryHover: colors.primaryHover,
-          colorPrimaryActive: colors.primaryActive,
-          colorBorder: colors.borderBase,
+          // colorPrimaryHover: colors.primaryHover,
+          // colorPrimaryActive: colors.primaryActive,
+          // colorBorder: colors.borderBase,
+        },
+        components: {
+          Input: {
+            controlHeightLG: 60,
+            fontSizeLG: 14,
+          },
         },
       }}
     >
