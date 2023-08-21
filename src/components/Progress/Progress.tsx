@@ -30,16 +30,21 @@ const Bar = styled.div<{ percent: number }>`
       props.percent <= 3
         ? percentWidth[3]
         : props.percent <= 6
-        ? percentWidth[6]
+        ? ((props.percent - 3) * (percentWidth[6] - percentWidth[3])) / 3 +
+          percentWidth[3]
         : props.percent <= 9
-        ? percentWidth[9]
+        ? ((props.percent - 6) * (percentWidth[9] - percentWidth[6])) / 3 +
+          percentWidth[6]
         : props.percent <= 12
-        ? percentWidth[12]
+        ? ((props.percent - 9) * (percentWidth[12] - percentWidth[9])) / 3 +
+          percentWidth[9]
         : props.percent <= 15
-        ? percentWidth[15]
+        ? ((props.percent - 12) * (percentWidth[15] - percentWidth[12])) / 3 +
+          percentWidth[12]
         : props.percent <= 50
-        ? percentWidth[50]
-        : 0}%;
+        ? ((props.percent - 15) * (percentWidth[50] - percentWidth[15])) / 35 +
+          percentWidth[15]
+        : 100}%;
 
     background: linear-gradient(to left, #ffd25f, #ff5c01);
     border-radius: 10px;

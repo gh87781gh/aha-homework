@@ -39,7 +39,7 @@ export default function Home() {
       <HR />
       <H1># of results per page</H1>
       <Number>30</Number>results
-      <Progress percent={10} />
+      <Progress percent={23} />
     </StyledHome>
   );
 }
