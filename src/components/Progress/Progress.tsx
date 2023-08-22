@@ -1,18 +1,11 @@
 "use client";
 
 import styled from "styled-components";
+import { useState, useMemo, useCallback, useEffect } from "react";
 
 import { colors } from "components/variables";
 
-const percentWidth: any = {
-  3: 0,
-  6: 18,
-  9: 36,
-  12: 54,
-  15: 72,
-  50: 100,
-};
-const Bar = styled.div<{ percent: number }>`
+const Bar = styled.div<{ percent: any }>`
   width: 100%;
   height: 8px;
   background-color: rgba(255, 255, 255, 0.3);
@@ -25,27 +18,7 @@ const Bar = styled.div<{ percent: number }>`
     left: 0;
     height: 100%;
     display: block;
-
-    width: ${(props) =>
-      props.percent <= 3
-        ? percentWidth[3]
-        : props.percent <= 6
-        ? ((props.percent - 3) * (percentWidth[6] - percentWidth[3])) / 3 +
-          percentWidth[3]
-        : props.percent <= 9
-        ? ((props.percent - 6) * (percentWidth[9] - percentWidth[6])) / 3 +
-          percentWidth[6]
-        : props.percent <= 12
-        ? ((props.percent - 9) * (percentWidth[12] - percentWidth[9])) / 3 +
-          percentWidth[9]
-        : props.percent <= 15
-        ? ((props.percent - 12) * (percentWidth[15] - percentWidth[12])) / 3 +
-          percentWidth[12]
-        : props.percent <= 50
-        ? ((props.percent - 15) * (percentWidth[50] - percentWidth[15])) / 35 +
-          percentWidth[15]
-        : 100}%;
-
+    width: ${(props) => props.percent}%;
     background: linear-gradient(to left, #ffd25f, #ff5c01);
     border-radius: 10px;
 
@@ -96,8 +69,37 @@ const Bar = styled.div<{ percent: number }>`
 `;
 
 export default function Progress(props: { percent: number }) {
+  const percentWidth: any = {
+    3: 0,
+    6: 18,
+    9: 36,
+    12: 54,
+    15: 72,
+    50: 100,
+  };
+  const width = useMemo(() => {
+    let target: number = 0;
+    if (props.percent <= 3) {
+      target = percentWidth[3];
+    } else if (props.percent <= 15) {
+      const x = Math.floor(props.percent / 3) - 1;
+      target =
+        ((props.percent - x * 3) *
+          (percentWidth[x * 3 + 3] - percentWidth[x * 3])) /
+          3 +
+        percentWidth[x * 3];
+    } else if (props.percent <= 50) {
+      target =
+        ((props.percent - 15) * (percentWidth[50] - percentWidth[15])) / 35 +
+        percentWidth[15];
+    } else {
+      target = 100;
+    }
+    return target;
+  }, [props.percent]);
+
   return (
-    <Bar percent={props.percent}>
+    <Bar percent={width}>
       <em></em>
       <span className="percent-dot percent-dot-3">3</span>
       <span className="percent-dot percent-dot-6">6</span>
